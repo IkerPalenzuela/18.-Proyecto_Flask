@@ -13,7 +13,7 @@ def create_app():
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///python.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # evitar warning de SQLAlchemy
-     # 🔐 CLAVE SECRETA (obligatoria para Flask-WTF)
+    # 🔐 CLAVE SECRETA (obligatoria para Flask-WTF)
     app.config["SECRET_KEY"] = "dev-secret-key"  # luego la convendría cambiarla por una más segura en producción
 
     db.init_app(app)
