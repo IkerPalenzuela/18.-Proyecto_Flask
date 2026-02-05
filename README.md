@@ -6,3 +6,6 @@ pip install -r requirements.txt
 
 Siempre que se instalen nuevas dependencias hay que actualizar el archivo requirements.txt con:
 pip freeze > requirements.txt
+
+Para activar el venv usar comando: 
+venv\Scripts\activate

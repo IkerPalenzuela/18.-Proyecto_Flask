@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, IntegerField, SubmitField
+from wtforms.validators import DataRequired, Length, NumberRange
 
 class LibroForm(FlaskForm):
     titulo = StringField(
@@ -13,9 +13,16 @@ class LibroForm(FlaskForm):
         validators=[DataRequired(), Length(max=100)]
     )
 
-    resumen = TextAreaField(
-        "Resumen",
-        # validators=[Length(min=5, max=1000)]
+    # Cambiamos Resumen por Año (Integer)
+    anio = IntegerField(
+        "Año",
+        validators=[NumberRange(min=1000, max=2100, message="Pon un año válido")]
+    )
+
+    # Cambiamos Resumen por Categoria
+    categoria = StringField(
+        "Categoría",
+        validators=[Length(max=100)]
     )
 
     submit = SubmitField("Guardar")

@@ -12,15 +12,34 @@
         <a href="{{ url_for('navigation.inicio') }}">Inicio</a>
         <a href="{{ url_for('libros.listar') }}">Libros</a>
         <a href="{{ url_for('libros.grid') }}">Libros Grid</a>
+        <a href="{{ url_for('libros.prestamos') }}">Prestamos</a>
+
+        {% if current_user.is_authenticated %}
+            <span>Hola, {{ current_user.username }}</span>
+            <a href="{{ url_for('auth.logout') }}" style="color: red;">Cerrar Sesión</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">Iniciar Sesión</a>
+        {% endif %}
     </nav>
 </header>
 
 <main>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+                <li style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc;">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     {% block content %}
     {% endblock %}
 </main>
+
 <footer>
-    <p>&copy; 2025 Mi aplicación</p>
+    <p>&copy; 2025 Mi Biblioteca - 2º DAW</p>
 </footer>
 </body>
 </html>

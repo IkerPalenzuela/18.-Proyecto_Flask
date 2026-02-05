@@ -14,4 +14,3 @@ navigation_bp = Blueprint(
 @navigation_bp.route("/")
 def inicio():
     return render_template("paginas/inicio.html")
-

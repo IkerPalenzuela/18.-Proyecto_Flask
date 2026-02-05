@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Préstamos Activos{% endblock %}
+
+{% block content %}
+<h1>Socios con Libros Prestados</h1>
+
+{% if socios %}
+<table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Socio</th>
+            <th>Email</th>
+            <th>Libro Prestado</th>
+            <th>Autor</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for socio in socios %}
+        {% for libro in socio.libros %}
+        <tr>
+            <td>{{ socio.nombre }}</td>
+            <td>{{ socio.email }}</td>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+            <td>
+                <a href="{{ url_for('libros.devolver', id=libro.id) }}">Devolver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay préstamos activos en este momento.</p>
+{% endif %}
+
+<br>
+<a href="{{ url_for('libros.listar') }}">Volver al listado de libros</a>
+
+{% endblock %}

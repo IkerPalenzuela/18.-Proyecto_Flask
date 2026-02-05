@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Prestar Libro{% endblock %}
+
+{% block content %}
+<h1>Prestar Libro</h1>
+
+<h2>Información del Libro</h2>
+<p><strong>Título:</strong> {{ libro.titulo }}</p>
+<p><strong>Autor:</strong> {{ libro.autor }}</p>
+<p><strong>Año:</strong> {{ libro.anio }}</p>
+<p><strong>Categoría:</strong> {{ libro.categoria }}</p>
+
+<hr>
+
+<h2>Seleccionar Socio</h2>
+
+<form method="POST">
+    <div>
+        <label for="socio_id">Socio:</label>
+        <select name="socio_id" id="socio_id" required>
+            <option value="">-- Selecciona un socio --</option>
+            {% for socio in socios %}
+                <option value="{{ socio.id }}">{{ socio.nombre }} ({{ socio.email }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <br>
+    
+    <button type="submit">Prestar Libro</button>
+</form>
+
+<br>
+<a href="{{ url_for('libros.listar') }}">Cancelar y volver</a>
+
+{% endblock %}

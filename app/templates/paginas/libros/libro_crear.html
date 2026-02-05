@@ -1,10 +1,12 @@
-
 {% extends "base.html" %}
-{% block title %}Editar libro{% endblock %}
-
+{% block title %}Crear libro{% endblock %}
 
 {% block content %}
 
-<h1>Crear libro con flask-WTF</h1>
-{%include 'componentes/libro_form.html'%}
+<h1>Crear nuevo libro</h1>
+
+{% include 'componentes/libro_form.html' %}
+
+<br>
+<a href="{{ url_for('libros.listar') }}">Cancelar y volver</a>
 {% endblock %}

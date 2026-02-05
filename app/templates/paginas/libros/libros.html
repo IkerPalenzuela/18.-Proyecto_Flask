@@ -3,14 +3,44 @@
 {% block title %}Libros{% endblock %}
 
 {% block content %}
-<h1>Libros</h1>
+<h1>Listado de Libros</h1>
 
-<ul>
+<button onclick="location.href='{{ url_for('libros.crear') }}'" style="margin-bottom: 20px;">+ Crear nuevo libro</button>
+
+<table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Año</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for libro in libros %}
-        <li>Titulo: <a href="/libros/{{ libro.id }}">{{ libro.titulo }}</a> Autor: {{ libro.autor }}</li>
-        
+        <tr>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+            <td>{{ libro.anio }}</td>
+            <td>
+                {% if libro.socio_id %}
+                    <span style="color: red;">Prestado</span>
+                {% else %}
+                    <span style="color: green;">Disponible</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('libros.editar', id=libro.id) }}">Editar</a> |
+                
+                {% if libro.socio_id %}
+                    <a href="{{ url_for('libros.devolver', id=libro.id) }}">Devolver</a>
+                {% else %}
+                    <a href="{{ url_for('libros.prestar', id=libro.id) }}">Prestar</a>
+                {% endif %}
+            </td>
+        </tr>
     {% endfor %}
-</ul>
-
-<button onclick="location.href='{{ url_for('libros.crear') }}'">Crear nuevo libro</button>
-    {% endblock %}
+    </tbody>
+</table>
+{% endblock %}
