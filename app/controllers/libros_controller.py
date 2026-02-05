@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_required
 from app.services import libros_service, user_service
 from app.forms.libro_form import LibroForm
+from app.forms.buscar_form import BuscarForm
 from app.decorators.role_decorator import role_required
 
 libros_bp = Blueprint("libros", __name__, url_prefix="/libros")
@@ -106,3 +107,15 @@ def prestamos():
     socios_con_prestamos = [socio for socio in socio_con_libros if socio.libros]
 
     return render_template("paginas/libros/prestamos.html", socios=socios_con_prestamos)
+
+# Buscar libros por tiutulos in necesidad de login
+@libros_bp.route("/buscar", methods=["GET", "POST"])
+def buscar():
+    form = BuscarForm()
+    libros = []
+    
+    # Solo realizamos la búsqueda si el formulario es válido y se ha enviado
+    if form.validate_on_submit():
+        libros = libros_service.buscar_libros(form.busqueda.data)
+    
+    return render_template("paginas/libros/libro_buscar.html", form=form, libros=libros)

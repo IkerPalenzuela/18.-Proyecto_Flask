@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Buscar Libros{% endblock %}
+
+{% block content %}
+<h1>Buscar Libros</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <div>
+        {{ form.termino.label }}
+        {{ form.termino(size=30) }}
+        {% for error in form.termino.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+    </div>
+    
+    <br>
+    {{ form.submit }}
+</form>
+
+<br><br>
+
+{% if form.is_submitted() %}
+    {% if libros %}
+        <h2>Resultados de la búsqueda ({{ libros|length }} libro(s) encontrado(s))</h2>
+        
+        <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Año</th>
+                    <th>Categoría</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for libro in libros %}
+                <tr>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor }}</td>
+                    <td>{{ libro.anio }}</td>
+                    <td>{{ libro.categoria }}</td>
+                    <td>
+                        {% if libro.socio_id %}
+                            <span style="color: red;">Prestado</span>
+                        {% else %}
+                            <span style="color: green;">Disponible</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="color: orange;">No se encontraron libros con ese término.</p>
+    {% endif %}
+{% endif %}
+
+<br>
+<a href="{{ url_for('libros.listar') }}">Volver al listado completo</a>
+
+{% endblock %}
