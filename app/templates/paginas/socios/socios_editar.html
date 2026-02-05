@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Socio{% endblock %}
+
+{% block content %}
+<h1>Editar Socio: {{ socio.nombre }}</h1>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    
+    <p>
+        {{ form.username.label }} (No editable)<br>
+        {{ form.username(readonly=true) }}
+    </p>
+
+    <p>
+        {{ form.nombre.label }}<br>
+        {{ form.nombre(size=30) }}
+    </p>
+
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=30) }}
+    </p>
+    
+    <p>{{ form.submit(value="Actualizar Datos") }}</p>
+</form>
+<a href="{{ url_for('user.listar') }}">Volver</a>
+{% endblock %}

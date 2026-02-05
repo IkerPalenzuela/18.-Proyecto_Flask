@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Gestión de Socios{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Listado de Socios</h1>
+    
+    <a href="{{ url_for('user.crear') }}" class="button">Crear Nuevo Socio</a>
+    
+    <a href="{{ url_for('user.prestamos') }}" class="button" style="background:#666;">Ver Socios con Préstamos</a>
+
+    <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Libros Prestados</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for socio in socios %}
+            <tr>
+                <td>{{ socio.id }}</td>
+                <td>{{ socio.nombre }}</td>
+                <td>{{ socio.username }}</td>
+                <td>{{ socio.email }}</td>
+                <td>
+                    {{ socio.libros|length }}
+                </td>
+                <td>
+                    <a href="{{ url_for('user.editar', id=socio.id) }}">Editar</a>
+                    
+                    {% if socio.role != 'admin' %}
+                    <form action="{{ url_for('user.borrar', id=socio.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que quieres borrar este socio?');">
+                        <button type="submit" style="color:red; background:none; border:none; cursor:pointer; text-decoration:underline;">Borrar</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

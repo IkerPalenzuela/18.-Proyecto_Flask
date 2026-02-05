@@ -9,9 +9,9 @@
     {{ form.hidden_tag() }}
     
     <div>
-        {{ form.termino.label }}
-        {{ form.termino(size=30) }}
-        {% for error in form.termino.errors %}
+        {{ form.busqueda.label }}
+        {{ form.busqueda(size=30) }}
+        {% for error in form.busqueda.errors %}
             <p style="color: red;">{{ error }}</p>
         {% endfor %}
     </div>

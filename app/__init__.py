@@ -10,12 +10,13 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
+    # Configuración de la base de datos y Flask-Login
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///python.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False 
     app.config["SECRET_KEY"] = "dev-secret-key" 
 
+    # Inicialización de extensiones
     db.init_app(app)
-    
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login' 
 
@@ -25,6 +26,9 @@ def create_app():
     
     from app.controllers.libros_controller import libros_bp
     app.register_blueprint(libros_bp)
+
+    from app.controllers.user_controller import user_bp
+    app.register_blueprint(user_bp)
     
     from app.controllers.api_controller import api_bp
     app.register_blueprint(api_bp)
