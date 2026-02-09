@@ -10,19 +10,20 @@ class LibroForm(FlaskForm):
 
     autor = StringField(
         "Autor",
-        validators=[DataRequired(), Length(max=100)]
+        validators=[DataRequired(message="El autor es obligatorio"), Length(max=100)]
     )
 
-    # Cambiamos Resumen por Año (Integer)
     anio = IntegerField(
         "Año",
-        validators=[NumberRange(min=1000, max=2100, message="Pon un año válido")]
+        validators=[
+            DataRequired(message="El año es obligatorio"),
+            NumberRange(min=1000, max=2100, message="Pon un año válido (ej: 2024)")
+        ]
     )
 
-    # Cambiamos Resumen por Categoria
     categoria = StringField(
         "Categoría",
         validators=[Length(max=100)]
     )
 
-    submit = SubmitField("Guardar")
+    submit = SubmitField("Guardar Libro")
