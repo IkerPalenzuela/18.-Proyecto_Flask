@@ -7,22 +7,6 @@
 
 <form method="post" novalidate>
     {{ form.hidden_tag() }}
-    
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=30) }}
-        {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=30) }}
-        {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
 
     <p>
         {{ form.nombre.label }}<br>
@@ -42,5 +26,6 @@
     
     <p>{{ form.submit() }}</p>
 </form>
-<a href="{{ url_for('user.listar') }}">Volver</a>
+
+<a href="{{ url_for('socios.listar') }}">Volver</a>
 {% endblock %}
