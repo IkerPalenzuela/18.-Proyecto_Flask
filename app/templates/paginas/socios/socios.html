@@ -6,13 +6,16 @@
 <div class="container">
     <h1>Listado de Socios</h1>
     
-    <a href="{{ url_for('socios.crear') }}" class="button">Crear Nuevo Socio</a>
-    
-    <a href="{{ url_for('libros.prestamos') }}" class="button" style="background:#666;">Ver Socios con Préstamos</a>
+    {# Solo el admin debería ver el botón de crear #}
+    {% if current_user.is_authenticated and current_user.rol == 'admin' %}
+        <a href="{{ url_for('socios.crear') }}" class="button">Crear Nuevo Socio</a>
+    {% endif %}
+
+    {# HEMOS BORRADO EL BOTÓN DE PRESTAMOS QUE DABA ERROR #}
 
     <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <thead>
-            <tr>
+            <tr style="background-color: #f2f2f2;">
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
@@ -26,7 +29,7 @@
                 <td>{{ socio.id }}</td>
                 <td>{{ socio.nombre }}</td>
                 <td>{{ socio.email }}</td>
-                <td>
+                <td style="text-align: center;">
                     {{ socio.libros|length }}
                 </td>
                 <td>
@@ -36,6 +39,10 @@
                         <button type="submit" style="color:red; background:none; border:none; cursor:pointer; text-decoration:underline;">Borrar</button>
                     </form>
                 </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No hay socios registrados.</td>
             </tr>
         {% endfor %}
         </tbody>

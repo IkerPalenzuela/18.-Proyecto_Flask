@@ -37,16 +37,24 @@ def create_app():
     from app.controllers.auth_controller import auth_bp
     app.register_blueprint(auth_bp)
 
-    # Crear las tablas en la base de datos
+    # Crear las tablas y poblar datos iniciales
     with app.app_context():
         from app.models.libro import Libro
         from app.models.user import Usuario 
         from app.models.socio import Socio
         
+        # Crea las tablas si no existen
         db.create_all()
         
+        # Importamos los servicios para poblar la base de datos
         from app.services.user_service import UserService
+        from app.services.socios_service import seed_socios
+        from app.services.libros_service import seed_libros
+        
+        # Ejecutamos las funciones para llenar las tablas
         UserService.ensure_admin()
+        seed_socios()
+        seed_libros()
 
     return app
 

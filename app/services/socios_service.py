@@ -79,3 +79,22 @@ def obtener_listado_prestamos_api():
                 "libro_autor": libro.autor
             })
     return resultado
+
+# Funcion para crear socios
+def seed_socios():
+    if Socio.query.count() == 0:
+        datos = [
+            ("Iker Casillas", "iker@mail.com"), ("Maria Garcia", "maria@mail.com"),
+            ("Juan Perez", "juan@mail.com"), ("Ana Belen", "ana@mail.com"),
+            ("Carlos Sainz", "carlos@mail.com"), ("Elena Furiase", "elena@mail.com"),
+            ("David Bisbal", "david@mail.com"), ("Lucia Gil", "lucia@mail.com"),
+            ("Sergio Ramos", "sergio@mail.com"), ("Paula Echevarria", "paula@mail.com"),
+            ("Fernando Alonso", "fernando@mail.com"), ("Sara Carbonero", "sara@mail.com"),
+            ("Jordi Alta", "jordi@mail.com"), ("Marta Sanchez", "marta@mail.com"),
+            ("Roberto Canario", "roberto@mail.com")
+        ]
+        for nombre, email in datos:
+            nuevo = Socio(nombre=nombre, email=email)
+            db.session.add(nuevo)
+        db.session.commit()
+        print("15 Socios creados.")

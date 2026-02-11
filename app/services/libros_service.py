@@ -83,3 +83,29 @@ def devolver_libro(libro_id):
     libro.socio_id = None
     db.session.commit()
     return True, "Libro devuelto correctamente."
+
+# Funcion para crear libros
+def seed_libros():
+    if Libro.query.count() == 0:
+        datos = [
+            ("El Quijote", "Cervantes", 1605, "Clásico"),
+            ("1984", "George Orwell", 1949, "Distopía"),
+            ("El Principito", "Saint-Exupéry", 1943, "Infantil"),
+            ("Cien años de soledad", "G. Márquez", 1967, "Novela"),
+            ("Harry Potter", "J.K. Rowling", 1997, "Fantasía"),
+            ("El Hobbit", "J.R.R. Tolkien", 1937, "Fantasía"),
+            ("Drácula", "Bram Stoker", 1897, "Terror"),
+            ("El Código Da Vinci", "Dan Brown", 2003, "Thriller"),
+            ("Orgullo y Prejuicio", "Jane Austen", 1813, "Romance"),
+            ("Fahrenheit 451", "Ray Bradbury", 1953, "Ciencia Ficción"),
+            ("Crónica de una muerte anunciada", "G. Márquez", 1981, "Novela"),
+            ("El resplandor", "Stephen King", 1977, "Terror"),
+            ("La sombra del viento", "Zafón", 2001, "Misterio"),
+            ("Los pilares de la Tierra", "Ken Follett", 1989, "Histórica"),
+            ("Sapiens", "Yuval Noah", 2011, "Ensayo")
+        ]
+        for titulo, autor, anio, categoria in datos:
+            nuevo = Libro(titulo=titulo, autor=autor, anio=anio, categoria=categoria)
+            db.session.add(nuevo)
+        db.session.commit()
+        print("15 Libros creados.")
