@@ -29,8 +29,18 @@
                 <td>{{ socio.id }}</td>
                 <td>{{ socio.nombre }}</td>
                 <td>{{ socio.email }}</td>
-                <td style="text-align: center;">
-                    {{ socio.libros|length }}
+                <td>
+                    {% if socio.libros %}
+                        {# list-style-type: none QUITA el punto #}
+                        {# padding: 0 QUITA el espacio a la izquierda #}
+                        <ul style="list-style-type: none; margin: 0; padding: 0;">
+                            {% for libro in socio.libros %}
+                                <li>{{ libro.titulo }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span style="color: #999;"></span>
+                    {% endif %}
                 </td>
                 <td>
                     <a href="{{ url_for('socios.editar', id=socio.id) }}">Editar</a>
