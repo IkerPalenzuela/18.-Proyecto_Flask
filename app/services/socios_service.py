@@ -88,17 +88,18 @@ def obtener_listado_prestamos_api():
 def seed_socios():
     if Socio.query.count() == 0:
         datos = [
-            ("Iker Casillas", "iker@mail.com"), ("Maria Garcia", "maria@mail.com"),
-            ("Juan Perez", "juan@mail.com"), ("Ana Belen", "ana@mail.com"),
-            ("Carlos Sainz", "carlos@mail.com"), ("Elena Furiase", "elena@mail.com"),
-            ("David Bisbal", "david@mail.com"), ("Lucia Gil", "lucia@mail.com"),
-            ("Sergio Ramos", "sergio@mail.com"), ("Paula Echevarria", "paula@mail.com"),
-            ("Fernando Alonso", "fernando@mail.com"), ("Sara Carbonero", "sara@mail.com"),
-            ("Jordi Alta", "jordi@mail.com"), ("Marta Sanchez", "marta@mail.com"),
-            ("Roberto Canario", "roberto@mail.com")
+            ("Antonio García", "antonio.garcia@mail.com"), ("Carmen López", "carmen.lopez@mail.com"),
+            ("Manuel Rodríguez", "manuel.rodriguez@mail.com"), ("Laura Martínez", "laura.martinez@mail.com"),
+            ("José González", "jose.gonzalez@mail.com"), ("Ana Fernández", "ana.fernandez@mail.com"),
+            ("David Pérez", "david.perez@mail.com"), ("Isabel Sánchez", "isabel.sanchez@mail.com"),
+            ("Javier Ruiz", "javier.ruiz@mail.com"), ("María Gómez", "maria.gomez@mail.com"),
+            ("Francisco Díaz", "francisco.diaz@mail.com"), ("Elena Martín", "elena.martin@mail.com"),
+            ("Pablo Jiménez", "pablo.jimenez@mail.com"), ("Raquel Moreno", "raquel.moreno@mail.com"),
+            ("Álvaro Muñoz", "alvaro.munoz@mail.com")
         ]
         for nombre, email in datos:
             nuevo = Socio(nombre=nombre, email=email)
             db.session.add(nuevo)
+        
         db.session.commit()
-        print("15 Socios creados.")
+        print("15 Socios (datos realistas) creados.")
