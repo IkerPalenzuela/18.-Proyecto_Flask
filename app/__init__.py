@@ -11,7 +11,7 @@ def create_app():
     CORS(app)
 
     # Configuración de la base de datos y Flask-Login
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///library.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///python.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False 
     app.config["SECRET_KEY"] = "dev-secret-key" 
 
