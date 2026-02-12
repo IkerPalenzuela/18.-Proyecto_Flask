@@ -11,12 +11,13 @@ def obtener_por_id(id):
 
 # Crear Socio
 def crear_socio(nombre, email):
-    # Validamos que el email no exista ya
+    # Validamos que el email no este registrado
     if Socio.query.filter_by(email=email).first():
         return False, "Ese email ya está registrado."
 
     nuevo_socio = Socio(nombre=nombre, email=email)
     
+    # Intentamos guardar el nuevo socio en la bd
     try:
         db.session.add(nuevo_socio)
         db.session.commit()
@@ -39,6 +40,7 @@ def editar_socio(id, nombre, email):
     socio.nombre = nombre
     socio.email = email
     
+    # Intentamos guardar los cambios en la bd
     try:
         db.session.commit()
         return True, "Socio actualizado correctamente."
@@ -55,6 +57,7 @@ def borrar_socio(id):
     if socio.libros: 
         return False, "No se puede borrar: El socio tiene libros sin devolver."
 
+    # Intentamos eliminar el socio de la bd
     try:
         db.session.delete(socio)
         db.session.commit()
@@ -65,6 +68,7 @@ def borrar_socio(id):
 
 # API: Listado de préstamos
 def obtener_listado_prestamos_api():
+    # Filtramos los socios que tienen libros
     socios = Socio.query.filter(Socio.libros.any()).all()
     resultado = []
     

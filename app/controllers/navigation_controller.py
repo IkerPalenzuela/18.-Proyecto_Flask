@@ -6,6 +6,7 @@ navigation_bp = Blueprint(
     url_prefix="/"
 )
 
+# Ruta de inicio
 @navigation_bp.route("/")
 def inicio():
     return render_template("paginas/inicio.html")

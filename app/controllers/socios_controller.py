@@ -6,6 +6,7 @@ from app.decorators.role_decorator import role_required
 
 socios_bp = Blueprint("socios", __name__, url_prefix="/socios")
 
+# Listado de socios (Admin)
 @socios_bp.route("/")
 @login_required
 @role_required('admin')
@@ -13,6 +14,7 @@ def listar():
     socios = socios_service.listar_todos()
     return render_template("paginas/socios/socios.html", socios=socios)
 
+# Crear socio (Admin)
 @socios_bp.route("/crear", methods=["GET", "POST"])
 @login_required
 @role_required('admin')
@@ -31,6 +33,7 @@ def crear():
     
     return render_template("paginas/socios/socios_crear.html", form=form)
 
+# Editar socio (Admin)
 @socios_bp.route("/<int:id>/editar", methods=["GET", "POST"])
 @login_required
 @role_required('admin')
@@ -56,6 +59,7 @@ def editar(id):
 
     return render_template("paginas/socios/socios_editar.html", form=form, socio=socio)
 
+# Borrar socio (Admin)
 @socios_bp.route("/<int:id>/borrar", methods=["POST"])
 @login_required
 @role_required('admin')

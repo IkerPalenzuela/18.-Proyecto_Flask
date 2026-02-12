@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, Length, NumberRange
 
+# Validaciones para el formulario de libros
 class LibroForm(FlaskForm):
     titulo = StringField(
         "Título",
@@ -23,7 +24,7 @@ class LibroForm(FlaskForm):
 
     categoria = StringField(
         "Categoría",
-        validators=[Length(max=100)]
+        validators=[DataRequired(message="La categoria es obligatoria"),Length(max=100)]
     )
 
     submit = SubmitField("Guardar Libro")

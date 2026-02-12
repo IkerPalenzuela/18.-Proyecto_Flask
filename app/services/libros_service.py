@@ -51,6 +51,7 @@ def borrar_libro(id):
     if libro.socio_id is not None:
         return False, "No se puede borrar: El libro está prestado actualmente."
 
+    # Si pasa la validación, procedemos a borrar
     try:
         db.session.delete(libro)
         db.session.commit()

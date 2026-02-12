@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Email, Length
 
+# Validaciones para el formulario de socios
 class SocioForm(FlaskForm):
     nombre = StringField('Nombre Completo', validators=[
         DataRequired(message="El nombre es obligatorio"),
